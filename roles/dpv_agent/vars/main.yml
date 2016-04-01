@@ -1,0 +1,16 @@
+# variables for dpv_agent
+---
+
+dpv_configure_files:
+  - zk.yml
+  - logger.yml
+  - dpv_agent.yml
+
+dpv_system_packages:
+  - lvm2
+  - targetcli
+  - iscsi-initiator-utils
+  - lsscsi
+  - gcc
+  - git
+  - python-devel

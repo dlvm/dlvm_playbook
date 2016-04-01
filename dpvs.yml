@@ -1,0 +1,6 @@
+---
+# This playbok would install dlvm_dpv_agent
+
+- hosts: dpvs
+  roles:
+    - role: dpv_agent

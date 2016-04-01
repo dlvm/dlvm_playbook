@@ -1,0 +1,56 @@
+---
+# This playbook would deploy dlvm_dpv_agent
+
+- name: Install epel
+  yum: name=epel-release state=present
+
+- name: Install system packages
+  yum: name="{{item}}" state=present
+  with_items: "{{dpv_system_packages}}"
+
+- name: Create dlvm group
+  group: name=dlvm
+
+- name: Create dlvm user
+  user: name=dlvm group=dlvm groups=wheel
+
+- name: Copy dlvm sudo no passward file
+  copy: src=99-dlvm-user dest=/etc/sudoers.d/99-dlvm-user
+
+- name: Create dlvm log directory
+  file: path="/var/log/dlvm" state=directory owner=dlvm group=dlvm recurse=yes
+
+- name: Create dlvm run pid directory
+  file: path="/run/dlvm" state=directory owner=dlvm group=dlvm recurse=yes
+
+- name: Checkout dlvm_dpv_agent
+  git:
+    repo=https://github.com/dlvm/dlvm_dpv_agent.git
+    dest=/opt/dlvm_dpv_agent
+    version={{dpv_version}}
+
+- name: Install pip
+  yum: name=python-pip state=present
+
+- name: Install virtualenv
+  pip: name=virtualenv
+
+- name: Create virtualenv and install dlvm_dpv_agent
+  pip:
+    requirements="/opt/dlvm_dpv_agent/requirements.txt"
+    virtualenv="/opt/dlvm_dpv_agent_env"
+    virtualenv_python=python2.7
+
+- name: Install dlvm_dpv_agent
+  pip: name="file:///opt/dlvm_dpv_agent" virtualenv="/opt/dlvm_dpv_agent_env"
+
+- name: Copy configure templates
+  template: src="{{item}}.j2" dest=/etc/dlvm/{{item}}
+  with_items: "{{dpv_configure_files}}"
+- name: Copy systemd unit
+  copy:
+    src=dlvm_dpv_agent.service
+    dest=/usr/lib/systemd/system/dlvm_dpv_agent.service
+
+- name: Start dlvm_dpv_agent service
+  service: name=dlvm_dpv_agent state=started enabled=yes

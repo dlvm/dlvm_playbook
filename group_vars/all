@@ -1,0 +1,3 @@
+zookeeper_hosts: 10.0.0.58:2181
+virtual_total: 2T
+dpv_version: HEAD
