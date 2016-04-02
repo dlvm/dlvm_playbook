@@ -20,9 +20,6 @@
 - name: Create dlvm log directory
   file: path="/var/log/dlvm" state=directory owner=dlvm group=dlvm recurse=yes
 
-- name: Create dlvm run pid directory
-  file: path="/run/dlvm" state=directory owner=dlvm group=dlvm recurse=yes
-
 - name: Checkout dlvm_dpv_agent
   git:
     repo=https://github.com/dlvm/dlvm_dpv_agent.git
@@ -42,11 +39,19 @@
     virtualenv_python=python2.7
 
 - name: Install dlvm_dpv_agent
-  pip: name="file:///opt/dlvm_dpv_agent" virtualenv="/opt/dlvm_dpv_agent_env"
+  pip:
+    name="file:///opt/dlvm_dpv_agent"
+    virtualenv="/opt/dlvm_dpv_agent_env"
+    state=latest
+  notify:
+    - restart dlvm_dpv_agent
 
 - name: Copy configure templates
   template: src="{{item}}.j2" dest=/etc/dlvm/{{item}}
   with_items: "{{dpv_configure_files}}"
+  notify:
+    - restart dlvm_dpv_agent
+
 - name: Copy systemd unit
   copy:
     src=dlvm_dpv_agent.service
@@ -54,3 +59,8 @@
 
 - name: Start dlvm_dpv_agent service
   service: name=dlvm_dpv_agent state=started enabled=yes
+  register: dpv_agent_service
+
+- name: reload systemd
+  command: /usr/bin/systemctl --system daemon-reload
+  when: dpv_agent_service | changed

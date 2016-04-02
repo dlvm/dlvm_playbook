@@ -1,0 +1,3 @@
+---
+- name: restart dlvm_dpv_agent
+  service: name=dlvm_dpv_agent state=restarted

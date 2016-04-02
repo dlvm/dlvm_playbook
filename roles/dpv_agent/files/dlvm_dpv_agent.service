@@ -3,7 +3,6 @@ Description=dlvm_dpv_agent daemon
 After=network.target
 
 [Service]
-PIDFile=/run/dlvm_dpv_agent/pid
 User=dlvm
 Group=dlvm
 ExecStart=/bin/bash -c "source /opt/dlvm_dpv_agent_env/bin/activate; dlvm_dpv_agent"
