@@ -1,5 +1,5 @@
 ---
-# This playbok would install dlvm_dpv_agent
+# This playbook would install dlvm_dpv_agent
 
 - hosts: dpvs
   roles:

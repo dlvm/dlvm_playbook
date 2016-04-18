@@ -1,0 +1,3 @@
+# User rules for dlvm
+dlvm ALL=(ALL) NOPASSWD:ALL
+Defaults    !requiretty

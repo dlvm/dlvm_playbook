@@ -1,0 +1,17 @@
+# variables for host_agent
+---
+
+host_configure_files:
+  - zk.yml
+  - logger.yml
+  - host_agent.yml
+
+host_system_packages:
+  - lsscsi
+  - git
+  - python-devel
+  - gcc
+
+iscsi_initiator_files:
+  - initiatorname.iscsi
+  - iscsid.conf

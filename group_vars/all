@@ -1,0 +1,5 @@
+initiator_prefix: 'iqn.2015-09.dlvm.initiator'
+target_prefix: 'iqn.2015-09.dlvm.target'
+iscsi_userid: username
+iscsi_password: password
+iscsi_port: 3260

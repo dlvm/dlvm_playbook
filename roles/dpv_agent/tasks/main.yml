@@ -61,6 +61,6 @@
   service: name=dlvm_dpv_agent state=started enabled=yes
   register: dpv_agent_service
 
-- name: reload systemd
+- name: Reload systemd
   command: /usr/bin/systemctl --system daemon-reload
   when: dpv_agent_service | changed
