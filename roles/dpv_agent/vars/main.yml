@@ -14,3 +14,8 @@ dpv_system_packages:
   - gcc
   - git
   - python-devel
+  - device-mapper-persistent-data
+
+iscsi_initiator_files:
+  - initiatorname.iscsi
+  - iscsid.conf

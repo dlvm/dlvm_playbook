@@ -8,6 +8,15 @@
   yum: name="{{item}}" state=present
   with_items: "{{dpv_system_packages}}"
 
+- name: Install iscsi-initiator-utils
+  yum: name=iscsi-initiator-utils state=present
+
+- name: Copy iscsi initaitor configure file and name file
+  template: src="{{item}}.j2" dest=/etc/iscsi/{{item}}
+  with_items: "{{iscsi_initiator_files}}"
+  notify:
+    - restart iscsid
+
 - name: Create dlvm group
   group: name=dlvm
 
