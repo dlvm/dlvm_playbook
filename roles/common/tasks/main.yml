@@ -1,0 +1,24 @@
+---
+# This playbook would install dlvm package
+
+- include: DebianInstall.yml
+  when: "ansible_os_family == 'Debian'"
+
+- include: RedHatInstall.yml
+  when: "ansible_os_family == 'RedHat'"
+
+- name: Install virtualenv
+  pip:
+    name: virtualenv
+
+- name: Create virtualenv and install dlvm
+  pip:
+    requirements: ""
+    virtualenv: "/opt/dlvm_env"
+    virtualenv_python: python2.7
+
+- name: Install dlvm
+  pip:
+    name: "https://testpypi.python.org/packages/2c/38/72e326d73066683f34f32777820016e2d666cccd2494e428d03266e03f97/dlvm-0.1.3-py2-none-any.whl"
+    virtualenv: "/opt/dlvm_env"
+    state: latest

@@ -1,6 +1,0 @@
----
-- name: restart dlvm_host_agent
-  service: name=dlvm_host_agent state=restarted
-
-- name: restart iscsid
-  service: name=iscsid state=restarted

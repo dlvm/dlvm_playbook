@@ -3,4 +3,5 @@
 
 - hosts: dpvs
   roles:
+    - role: common
     - role: dpv_agent

@@ -1,5 +1,6 @@
-initiator_prefix: 'iqn.2015-09.dlvm.initiator'
-target_prefix: 'iqn.2015-09.dlvm.target'
-iscsi_userid: username
-iscsi_password: password
-iscsi_port: 3260
+---
+# file: group_vars/all
+ansible_connection: ssh
+ansible_ssh_user: centos
+ansible_ssh_pass: 123
+ansible_sudo_pass: 123

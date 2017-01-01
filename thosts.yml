@@ -1,0 +1,7 @@
+---
+# This playbook would install dlvm_thost_agent
+
+- hosts: thosts
+  roles:
+    - role: common
+    - role: thost_agent
