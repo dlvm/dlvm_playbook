@@ -7,18 +7,59 @@
 - include: RedHatInstall.yml
   when: "ansible_os_family == 'RedHat'"
 
+- name: Create dlvm group
+  group:
+    name: "{{dlvm_group}}"
+    state: present
+
+- name: Create dlvm user
+  user:
+    name: "{{dlvm_user}}"
+    group: "{{dlvm_group}}"
+    groups: wheel
+    state: present
+
+- name: Copy dlvm user sudo no password file
+  template:
+    src: 99-dlvm-user.j2
+    dest: /etc/sudoers.d/99-dlvm-user
+
 - name: Install virtualenv
   pip:
     name: virtualenv
 
-- name: Create virtualenv and install dlvm
+- name: Create virtualenv
   pip:
     requirements: ""
-    virtualenv: "/opt/dlvm_env"
+    virtualenv: "{{dlvm_env_path}}"
     virtualenv_python: python2.7
 
 - name: Install dlvm
   pip:
-    name: "https://testpypi.python.org/packages/2c/38/72e326d73066683f34f32777820016e2d666cccd2494e428d03266e03f97/dlvm-0.1.3-py2-none-any.whl"
-    virtualenv: "/opt/dlvm_env"
+    name: "{{dlvm_package}}"
+    virtualenv: "{{dlvm_env_path}}"
     state: latest
+
+- name: Create dlvm log directory
+  file:
+    path: "{{dlvm_conf_path}}"
+    state: directory
+    recurse: yes
+
+- name: Create dlvm main conf file
+  template:
+    src: conf.yml.j2
+    dest: "{{dlvm_conf_path}}/conf.yml"
+
+- name: Create dlvm log conf file
+  template:
+    src: logger.yml.j2
+    dest: "{{dlvm_conf_path}}/logger.yml"
+
+- name: Create dlvm log directory
+  file:
+    path: "{{dlvm_log_path}}"
+    state: directory
+    owner: "{{dlvm_user}}"
+    group: "{{dlvm_group}}"
+    recurse: yes
