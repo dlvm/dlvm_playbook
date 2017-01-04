@@ -40,7 +40,7 @@
     virtualenv: "{{dlvm_env_path}}"
     state: latest
 
-- name: Create dlvm log directory
+- name: Create dlvm conf directory
   file:
     path: "{{dlvm_conf_path}}"
     state: directory
@@ -59,6 +59,14 @@
 - name: Create dlvm log directory
   file:
     path: "{{dlvm_log_path}}"
+    state: directory
+    owner: "{{dlvm_user}}"
+    group: "{{dlvm_group}}"
+    recurse: yes
+
+- name: Create dlvm run directory
+  file:
+    path: "{{dlvm_run_path}}"
     state: directory
     owner: "{{dlvm_user}}"
     group: "{{dlvm_group}}"

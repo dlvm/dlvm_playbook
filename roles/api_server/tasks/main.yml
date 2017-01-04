@@ -1,0 +1,19 @@
+---
+# This playbook would deploy dlvm api server
+
+- name: Install gunicorn
+  pip:
+    name: gunicorn
+    virtualenv: "{{dlvm_env_path}}"
+    state: latest
+
+- name: Create gunicorn service file
+  template:
+    src: gunicorn.service.j2
+    dest: /usr/lib/systemd/system/gunicorn.service
+
+- name: Start gunicorn
+  systemd:
+    name: gunicorn
+    state: restarted
+    enabled: yes
