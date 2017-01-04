@@ -1,0 +1,13 @@
+---
+# This playbook would deploy dlvm_thost_agent
+
+- name: Copy systemd unit
+  template:
+    src: dlvm_thost_agent.service.j2
+    dest: /usr/lib/systemd/system/dlvm_thost_agent.service
+
+- name: Start dlvm_thost_agent service
+  systemd:
+    name: dlvm_thost_agent
+    state: restarted
+    enabled: yes

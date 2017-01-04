@@ -4,4 +4,5 @@
 - hosts: thosts
   roles:
     - role: common
+    - role: iscsi
     - role: thost_agent
