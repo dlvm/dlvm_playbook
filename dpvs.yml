@@ -4,4 +4,5 @@
 - hosts: dpvs
   roles:
     - role: common
+    - role: iscsi
     - role: dpv_agent

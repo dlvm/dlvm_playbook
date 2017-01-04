@@ -1,0 +1,18 @@
+---
+# This playbook would deploy dlvm_dpv_agent
+
+- include: DebianInstall.yml
+  when: "ansible_os_family == 'Debian'"
+
+- include: RedHatInstall.yml
+  when: "ansible_os_family == 'RedHat'"
+
+- name: Copy iscsi configure files
+  template:
+    src: "{{item}}.j2"
+    dest: /etc/iscsi/{{item}}
+  with_items:
+    - initiatorname.iscsi
+    - iscsid.conf
+  notify:
+    - restart iscsid

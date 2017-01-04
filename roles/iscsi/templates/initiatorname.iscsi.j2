@@ -1,0 +1,5 @@
+{% for item in dlvm_conf %}
+{% if item.name == "initiator_prefix" %}
+InitiatorName={{item.value}}.{{inventory_hostname}}
+{% endif %}
+{% endfor %}

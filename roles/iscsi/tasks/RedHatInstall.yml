@@ -6,4 +6,6 @@
     name: "{{item}}"
     state: present
   with_items:
-    - lvm2
+    - targetcli
+    - iscsi-initiator-utils
+    - device-mapper-persistent-data

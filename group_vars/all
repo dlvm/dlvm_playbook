@@ -4,8 +4,14 @@ dlvm_group: dlvm
 dlvm_env_path: "/opt/dlvm_env"
 dlvm_conf_path: "/etc/dlvm"
 dlvm_log_path: "/var/log/dlvm"
+dlvm_initiator_prefix: "iqn.2015-09.dlvm.initiator"
+dlvm_target_prefix: "iqn.2015-09.dlvm.target"
 dlvm_conf:
-  - name: api_listener
-    value: 127.0.0.1
-  - name: api_port
-    value: 9521
+  - name: initiator_prefix
+    value: iqn.2016-12.dlvm.initiator
+  - name: target_prefix
+    value: iqn.2016-12.dlvm.target
+  - name: iscsi_userid
+    value: dlvm_user
+  - name: iscsi_password
+    value: dlvm_password
