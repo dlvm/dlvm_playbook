@@ -8,7 +8,7 @@
   when: "ansible_os_family == 'RedHat'"
 
 - name: Init dpv transaction number
-  command: "/bin/bash -c 'source {{dlvm_env_path}}/bin/activate; dlvm_init_transaction dpv 0'"
+  command: "/bin/bash -c 'source {{dlvm_env_path}}/bin/activate; dlvm_init_obt dpv 0'"
   become: yes
   become_user: "{{dlvm_user}}"
 

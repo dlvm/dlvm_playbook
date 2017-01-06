@@ -2,7 +2,7 @@
 # This playbook would deploy dlvm_thost_agent
 
 - name: Init thost transaction number
-  command: "/bin/bash -c 'source {{dlvm_env_path}}/bin/activate; dlvm_init_transaction thost 0'"
+  command: "/bin/bash -c 'source {{dlvm_env_path}}/bin/activate; dlvm_init_obt thost 0'"
   become: yes
   become_user: "{{dlvm_user}}"
 
