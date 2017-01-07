@@ -1,5 +1,5 @@
 # dlvm config file
 
 {% for item in dlvm_conf %}
-{{item.name}}: {{item.value}}
+{{item}}: {{dlvm_conf[item]}}
 {% endfor %}

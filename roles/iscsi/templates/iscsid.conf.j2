@@ -55,14 +55,8 @@ node.session.auth.authmethod = CHAP
 
 # To set a CHAP username and password for initiator
 # authentication by the target(s), uncomment the following lines:
-{% for item in dlvm_conf %}
-{% if item.name == "iscsi_userid" %}
-node.session.auth.username = {{item.value}}
-{% endif %}
-{% if item.name == "iscsi_password" %}
-node.session.auth.password = {{item.value}}
-{% endif %}
-{% endfor %}
+node.session.auth.username = {{dlvm_conf.iscsi_userid}}
+node.session.auth.password = {{dlvm_conf.iscsi_password}}
 
 # To set a CHAP username and password for target(s)
 # authentication by the initiator, uncomment the following lines:

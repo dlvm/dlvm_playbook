@@ -64,9 +64,9 @@
     group: "{{dlvm_group}}"
     recurse: yes
 
-- name: Create dlvm run directory
+- name: Create dlvm work directory
   file:
-    path: "{{dlvm_run_path}}"
+    path: "{{dlvm_conf.work_dir}}"
     state: directory
     owner: "{{dlvm_user}}"
     group: "{{dlvm_group}}"

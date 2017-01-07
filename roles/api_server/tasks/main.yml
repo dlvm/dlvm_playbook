@@ -16,6 +16,11 @@
   template:
     src: gunicorn.service.j2
     dest: /usr/lib/systemd/system/gunicorn.service
+  register: gunicorn_service
+
+- name: Reload systemd for gunicorn
+  command: /usr/bin/systemctl --system daemon-reload
+  when: gunicorn_service | changed
 
 - name: Start gunicorn
   systemd:

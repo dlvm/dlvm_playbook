@@ -4,18 +4,15 @@ dlvm_group: dlvm
 dlvm_env_path: "/opt/dlvm_env"
 dlvm_conf_path: "/etc/dlvm"
 dlvm_log_path: "/var/log/dlvm"
-dlvm_run_path: "/run/dlvm"
 dlvm_initiator_prefix: "iqn.2015-09.dlvm.initiator"
 dlvm_target_prefix: "iqn.2015-09.dlvm.target"
 dlvm_conf:
-  - name: initiator_prefix
-    value: iqn.2016-12.dlvm.initiator
-  - name: target_prefix
-    value: iqn.2016-12.dlvm.target
-  - name: iscsi_userid
-    value: dlvm_user
-  - name: iscsi_password
-    value: dlvm_password
+  initiator_prefix: iqn.2016-12.dlvm.initiator
+  target_prefix: iqn.2016-12.dlvm.target
+  iscsi_userid: dlvm_user
+  iscsi_password: dlvm_password
+  work_dir: /opt/dlvm_work_dir
+  db_uri: sqlite:////opt/dlvm_work_dir/dlvm.db
 gunicorn_access_file: "/var/log/dlvm/gunicorn_access.log"
 gunicorn_workers: 10
 gunicorn_bind: 127.0.0.1:9521

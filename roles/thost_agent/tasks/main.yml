@@ -10,6 +10,11 @@
   template:
     src: dlvm_thost_agent.service.j2
     dest: /usr/lib/systemd/system/dlvm_thost_agent.service
+  register: thost_agent_service
+
+- name: Reload systemd for thost_agent service
+  command: /usr/bin/systemctl --system daemon-reload
+  when: thost_agent_service | changed
 
 - name: Start dlvm_thost_agent service
   systemd:

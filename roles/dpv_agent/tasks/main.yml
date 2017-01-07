@@ -16,6 +16,11 @@
   template:
     src: dlvm_dpv_agent.service.j2
     dest: /usr/lib/systemd/system/dlvm_dpv_agent.service
+  register: dpv_agent_service
+
+- name: Reload systemd for dpv_agent service
+  command: /usr/bin/systemctl --system daemon-reload
+  when: dpv_agent_service | changed
 
 - name: Start dlvm_dpv_agent service
   systemd:
