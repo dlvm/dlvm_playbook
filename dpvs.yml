@@ -6,3 +6,5 @@
     - role: common
     - role: iscsi
     - role: dpv_agent
+    - role: local_lvm
+      when: "{{create_local_lvm}} == true"

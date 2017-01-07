@@ -1,0 +1,4 @@
+---
+device_file: "/tmp/dlvm_local_pv"
+device_size: 10240
+loop_name: "/dev/loop255"
