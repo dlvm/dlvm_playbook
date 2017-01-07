@@ -9,5 +9,10 @@
     gpgcheck: no
 
 
-- name: Install pip
-  yum: name=python-pip state=present
+- name: Install system package
+  yum:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - python-pip
+    - libselinux-python
