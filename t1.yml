@@ -1,4 +1,0 @@
-- hosts: dpvs
-  roles:
-    - role: common
-    - role: iscsi
