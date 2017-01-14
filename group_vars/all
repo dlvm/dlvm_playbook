@@ -13,8 +13,11 @@ dlvm_conf:
   iscsi_password: dlvm_password
   work_dir: /opt/dlvm_work_dir
   db_uri: sqlite:////opt/dlvm_work_dir/dlvm.db
+  'broker_url': 'amqp://dlvm_monitor:dlvm_password@localhost:5672/dlvm_vhost'
   local_vg: dlvm_vg
 gunicorn_access_file: "/var/log/dlvm/gunicorn_access.log"
 gunicorn_workers: 10
 gunicorn_bind: 127.0.0.1:9521
+all_in_one: false
 create_local_lvm: true
+create_mq: true

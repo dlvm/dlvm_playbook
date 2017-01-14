@@ -1,0 +1,12 @@
+---
+# This playbook would install all dlvm components to a single server
+
+- hosts: all_in_one
+  roles:
+    - role: common
+    - role: iscsi
+    - role: dpv_agent
+    - role: thost_agent
+    - role: api_server
+    - role: local_lvm
+    - role: rabbitmq

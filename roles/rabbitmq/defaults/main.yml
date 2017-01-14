@@ -1,0 +1,4 @@
+---
+mq_user: dlvm_monitor
+mq_password: dlvm_password
+mq_vhost: /dlvm_vhost
