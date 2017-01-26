@@ -8,5 +8,6 @@
     - role: dpv_agent
     - role: thost_agent
     - role: api_server
+    - role: monitor
     - role: local_lvm
     - role: rabbitmq
