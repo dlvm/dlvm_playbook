@@ -6,3 +6,5 @@
     - role: common
     - role: iscsi
     - role: dpv_agent
+    - role: local_lvm
+      when: dlvm_local_lvm
