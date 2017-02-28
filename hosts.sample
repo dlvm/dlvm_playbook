@@ -1,0 +1,15 @@
+[dpvs]
+localhost
+
+[thosts]
+localhost
+
+[api_servers]
+localhost
+
+[all:vars]
+ansible_connection=ssh
+ansible_user=<user_name>
+ansible_become=true
+ansible_become_user=root
+# ansible_ssh_private_key_file=<key_file_path>
