@@ -15,15 +15,11 @@
 - name: Create gunicorn service file
   template:
     src: gunicorn.service.j2
-    dest: /usr/lib/systemd/system/gunicorn.service
-  register: gunicorn_service
-
-- name: Reload systemd for gunicorn
-  command: /usr/bin/systemctl --system daemon-reload
-  when: gunicorn_service | changed
+    dest: /etc/systemd/system/gunicorn.service
 
 - name: Start gunicorn
   systemd:
     name: gunicorn
     state: restarted
+    daemon_reload: yes
     enabled: yes

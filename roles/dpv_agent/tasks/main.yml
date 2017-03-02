@@ -1,11 +1,15 @@
 ---
 # This playbook would deploy dlvm_dpv_agent
 
-- include: DebianInstall.yml
-  when: "ansible_os_family == 'Debian'"
+- name: Include distribution variables
+  include_vars:
+    file: "../vars/{{ansible_distribution}}-{{ansible_distribution_major_version}}.yml"
 
-- include: RedHatInstall.yml
-  when: "ansible_os_family == 'RedHat'"
+- name: Install system package
+  package:
+    name: "{{item}}"
+    state: present
+  with_items: "{{system_packages}}"
 
 - name: Init dpv transaction number
   command: "/bin/bash -c 'source {{dlvm_env_path}}/bin/activate; dlvm_init_obt dpv 0'"
@@ -15,15 +19,11 @@
 - name: Copy systemd unit
   template:
     src: dlvm_dpv_agent.service.j2
-    dest: /usr/lib/systemd/system/dlvm_dpv_agent.service
-  register: dpv_agent_service
-
-- name: Reload systemd for dpv_agent service
-  command: /usr/bin/systemctl --system daemon-reload
-  when: dpv_agent_service | changed
+    dest: /etc/systemd/system/dlvm_dpv_agent.service
 
 - name: Start dlvm_dpv_agent service
   systemd:
     name: dlvm_dpv_agent
     state: restarted
+    daemon_reload: yes
     enabled: yes

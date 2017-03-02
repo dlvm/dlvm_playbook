@@ -1,11 +1,28 @@
 ---
 # This playbook would install dlvm package
 
-- include: DebianInstall.yml
-  when: "ansible_os_family == 'Debian'"
+- name: Include distribution variables
+  include_vars:
+    file: "../vars/{{ansible_distribution}}-{{ansible_distribution_major_version}}.yml"
 
-- include: RedHatInstall.yml
+- name: Add epel repository
+  yum_repository:
+    name: epel
+    description: EPEL YUM repo
+    baseurl: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+    gpgcheck: no
   when: "ansible_os_family == 'RedHat'"
+
+- name: Install system package
+  package:
+    name: "{{item}}"
+    state: present
+  with_items: "{{system_packages}}"
+
+- name: Make sure wheel group exist
+  group:
+    name: wheel
+    state: present
 
 - name: Create dlvm group
   group:

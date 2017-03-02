@@ -1,0 +1,4 @@
+system_packages:
+  - targetcli
+  - open-iscsi
+  - thin-provisioning-tools

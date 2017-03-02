@@ -4,15 +4,11 @@
 - name: Copy systemd unit
   template:
     src: dlvm_monitor.service.j2
-    dest: /usr/lib/systemd/system/dlvm_monitor.service
-  register: monitor_service
-
-- name: Reload systemd for monitor service
-  command: /usr/bin/systemctl --system daemon-reload
-  when: monitor_service | changed
+    dest: /etc/systemd/system/dlvm_monitor.service
 
 - name: Start dlvm_monitor service
   systemd:
     name: dlvm_monitor
     state: restarted
+    daemon_reload: yes
     enabled: yes

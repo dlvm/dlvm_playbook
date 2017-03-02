@@ -12,7 +12,7 @@ dlvm_conf:
   iscsi_userid: dlvm_user
   iscsi_password: dlvm_password
   work_dir: /opt/dlvm_work_dir
-  db_uri: sqlite:////opt/dlvm_work_dir/dlvm.db
+  db_uri: postgresql://dlvm_db_user:dlvm_db_password@localhost/dlvm_db
   'broker_url': 'amqp://dlvm_monitor:dlvm_password@localhost:5672//dlvm_vhost'
   local_vg: dlvm_vg
   dpv_listener: '0.0.0.0'

@@ -1,11 +1,15 @@
 ---
 # This playbook would deploy dlvm_dpv_agent
 
-- include: DebianInstall.yml
-  when: "ansible_os_family == 'Debian'"
+- name: Include distribution variables
+  include_vars:
+    file: "../vars/{{ansible_distribution}}-{{ansible_distribution_major_version}}.yml"
 
-- include: RedHatInstall.yml
-  when: "ansible_os_family == 'RedHat'"
+- name: Install system package
+  package:
+    name: "{{item}}"
+    state: present
+  with_items: "{{system_packages}}"
 
 - name: Copy iscsi configure files
   template:
