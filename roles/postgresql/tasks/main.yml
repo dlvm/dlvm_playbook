@@ -1,0 +1,31 @@
+---
+# This playbook would deploy postgresql
+
+- name: Include distribution variables
+  include_vars:
+    file: "../vars/{{ansible_distribution}}-{{ansible_distribution_version}}.yml"
+
+- name: Install postgresql server
+  package:
+    name: "{{postgresql_package}}"
+    state: present
+
+- name: create pg_hba.conf
+  template:
+    src: pg_hba.conf.j2
+    dest: "/etc/postgresql/{{postgresql_version}}/{{postgresql_cluster_name}}/pg_hba.conf"
+    owner: "{{ postgresql_service_user }}"
+    group: "{{ postgresql_service_group }}"
+    mode: 0640
+  register: pg_hba
+
+- name: enable postgresql
+  systemd:
+    name: postgresql
+    state: restarted
+    enabled: yes
+  when: pg_hba | changed
+
+- name: create db
+  postgresql_db:
+    name: dlvm_db
