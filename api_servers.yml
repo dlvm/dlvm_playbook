@@ -3,9 +3,9 @@
 
 - hosts: api_servers
   roles:
-    - role: common
-    - role: api_server
     - role: rabbitmq
       when: dlvm_all_in_one
     - role: postgresql
       when: dlvm_all_in_one
+    - role: common
+    - role: api_server

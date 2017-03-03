@@ -10,6 +10,11 @@
     name: "{{postgresql_package}}"
     state: present
 
+- name: Install psycopg2
+  package:
+    name: python-psycopg2
+    state: present
+
 - name: create pg_hba.conf
   template:
     src: pg_hba.conf.j2
