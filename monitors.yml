@@ -1,0 +1,7 @@
+---
+# This playbook would install dlvm_monitor
+
+- hosts: monitors
+  roles:
+    - role: common
+    - role: monitor

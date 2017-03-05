@@ -7,6 +7,9 @@ localhost
 [api_servers]
 localhost
 
+[monitors]
+localhost
+
 [all:vars]
 ansible_connection=ssh
 ansible_user=<user_name>
