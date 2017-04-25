@@ -6,6 +6,14 @@
   become: yes
   become_user: "{{dlvm_user}}"
 
+- name: Makesure thost local obt db permission
+  file:
+    path: "{{work_dir}}"
+    state: directory
+    recurse: yes
+    owner: "{{dlvm_user}}"
+    group: "{{dlvm_group}}"
+
 - name: Copy systemd unit
   template:
     src: dlvm_thost_agent.service.j2
