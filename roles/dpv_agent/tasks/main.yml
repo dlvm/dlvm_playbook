@@ -18,7 +18,7 @@
 
 - name: Makesure dpv local obt db permission
   file:
-    path: "{{work_dir}}"
+    path: "{{dlvm_conf.work_dir}}"
     state: directory
     recurse: yes
     owner: "{{dlvm_user}}"
