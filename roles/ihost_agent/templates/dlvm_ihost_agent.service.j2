@@ -5,7 +5,7 @@ After=network.target
 [Service]
 User={{dlvm_user}}
 Group={{dlvm_group}}
-ExecStart=/bin/bash -c "source {{dlvm_env_path}}/bin/activate; dlvm_thost_agent"
+ExecStart=/bin/bash -c "source {{dlvm_env_path}}/bin/activate; dlvm_ihost_agent"
 ExecStop=/bin/kill -s TERM $MAINPID
 
 [Install]

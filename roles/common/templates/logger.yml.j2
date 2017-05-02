@@ -19,10 +19,10 @@ handlers:
     when: midnight
     interval: 1
     backupCount: 14
-  thost_handler:
+  ihost_handler:
     class: logging.handlers.TimedRotatingFileHandler
     formatter: simple
-    filename: {{dlvm_log_path}}/thost.log
+    filename: {{dlvm_log_path}}/ihost.log
     delay: True
     when: midnight
     interval: 1
@@ -44,9 +44,9 @@ loggers:
     level: DEBUG
     handlers: [dpv_handler]
     propagate: yes
-  dlvm_thost:
+  dlvm_ihost:
     level: DEBUG
-    handlers: [thost_handler]
+    handlers: [ihost_handler]
     propagate: yes
   dlvm_monitor:
     level: DEBUG

@@ -2,6 +2,6 @@
 # This playbook would deplay dlvm cluster
 
 - include: dpvs.yml
-- include: thosts.yml
+- include: ihosts.yml
 - include: api_servers.yml
 - include: monitors.yml

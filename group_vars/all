@@ -16,8 +16,8 @@ dlvm_conf:
   'broker_url': 'amqp://dlvm_monitor:dlvm_password@localhost:5672//dlvm_vhost'
   local_vg: dlvm_vg
   dpv_listener: '0.0.0.0'
-  thost_listener: '0.0.0.0'
-  cross_dpv: true
+  ihost_listener: '0.0.0.0'
+  cross_dpv: false
 gunicorn_access_file: "/var/log/dlvm/gunicorn_access.log"
 gunicorn_workers: 10
 gunicorn_bind: 127.0.0.1:9521

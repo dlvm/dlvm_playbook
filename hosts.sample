@@ -1,7 +1,7 @@
 [dpvs]
 localhost
 
-[thosts]
+[ihosts]
 localhost
 
 [api_servers]

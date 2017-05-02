@@ -1,0 +1,8 @@
+---
+# This playbook would install dlvm_ihost_agent
+
+- hosts: ihosts
+  roles:
+    - role: common
+    - role: iscsi
+    - role: ihost_agent
