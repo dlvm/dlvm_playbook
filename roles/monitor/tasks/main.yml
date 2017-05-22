@@ -6,6 +6,11 @@
     src: dlvm_monitor.service.j2
     dest: /etc/systemd/system/dlvm_monitor.service
 
+- name: Copy dlvm client configuration file
+  template:
+    src: client.yml.j2
+    dest: /etc/dlvm/client.yml
+
 - name: Start dlvm_monitor service
   systemd:
     name: dlvm_monitor
