@@ -1,0 +1,74 @@
+---
+# This playbook would install dlvm package
+
+- name: Install python3
+  include: "{{ansible_distribution}}-{{ansible_distribution_major_version}}.yml"
+
+- name: Create dlvm group
+  group:
+    name: "{{dlvm_group}}"
+    state: present
+
+- name: Create dlvm user
+  user:
+    name: "{{dlvm_user}}"
+    group: "{{dlvm_group}}"
+    state: present
+
+- name: Configure sudo
+  template:
+    src: 80-dlvm-user.j2
+    dest: /etc/sudoers.d/80-dlvm-user
+
+- name: Create dlvm root dir
+  file:
+    path: "{{dlvm_root_dir}}"
+    state: directory
+    recurse: yes
+
+- name: Create dlvm conf path
+  file:
+    path: "{{dlvm_conf_path}}"
+    state: directory
+    recurse: yes
+
+- name: Create dlvm log path
+  file:
+    path: "{{dlvm_log_path}}"
+    state: directory
+    owner: "{{dlvm_user}}"
+    group: "{{dlvm_group}}"
+    recurse: yes
+
+- name: Create dlvm var path
+  file:
+    path: "{{dlvm_var_path}}"
+    state: directory
+    owner: "{{dlvm_user}}"
+    group: "{{dlvm_group}}"
+    recurse: yes
+
+- name: Install virtualenv
+  pip:
+    name: virtualenv
+    executable: pip3
+    state: present
+
+- name: Copy requirements.txt
+  copy:
+    src: requirements.txt
+    dest: "{{dlvm_root_dir}}/requirements.txt"
+
+- name: Create virtualenv and install dependencies
+  pip:
+    requirements: "{{dlvm_root_dir}}/requirements.txt"
+    virtualenv: "{{dlvm_env_path}}"
+    virtualenv_python: "python3.{{python_minor_version}}"
+    state: present
+
+- name: install dlvm
+  pip:
+    name: "{{dlvm_package}}"
+    virtualenv: "{{dlvm_env_path}}"
+    virtualenv_python: "python3.{{python_minor_version}}"
+    state: present

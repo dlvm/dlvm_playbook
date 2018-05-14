@@ -3,4 +3,4 @@
 
 - hosts: api_servers
   roles:
-    - role: common
+    - role: dlvm_common
