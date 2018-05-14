@@ -1,0 +1,7 @@
+Cmnd_Alias DLVM_CMD = /usr/bin/targetcli, /usr/bin/iscsiadm, /usr/sbin/iscsiadm, \
+                      /sbin/lvm, /usr/sbin/lvm, /sbin/dmsetup, /usr/sbin/dmsetup, \
+                      {{dlvm_env_path}}/bin/dlvm_bin/dm_dd, \
+                      {{dlvm_env_path}}/bin/dlvm_bin/pdata_tools
+
+{{dlvm_user}} ALL = NOPASSWD: DLVM_CMD
+

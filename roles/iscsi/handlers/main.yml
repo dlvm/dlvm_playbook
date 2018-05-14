@@ -1,7 +1,0 @@
----
-
-- name: restart iscsid
-  systemd:
-    name: iscsid
-    state: restarted
-    enabled: yes

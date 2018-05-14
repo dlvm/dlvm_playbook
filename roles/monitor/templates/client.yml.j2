@@ -1,4 +1,0 @@
-api_server_list:
-  {% for api_server in groups['api_servers'] %}
-  - {{api_server}}:{{gunicorn_port}}
-  {% endfor %}

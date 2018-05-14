@@ -1,28 +1,8 @@
 ---
 # This playbook would install dlvm package
 
-- name: Include distribution variables
-  include_vars:
-    file: "../vars/{{ansible_distribution}}-{{ansible_distribution_major_version}}.yml"
-
-- name: Add epel repository
-  yum_repository:
-    name: epel
-    description: EPEL YUM repo
-    baseurl: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/
-    gpgcheck: no
-  when: "ansible_os_family == 'RedHat'"
-
-- name: Install system package
-  package:
-    name: "{{item}}"
-    state: present
-  with_items: "{{system_packages}}"
-
-- name: Make sure wheel group exist
-  group:
-    name: wheel
-    state: present
+- name: Install python3
+  include: "{{ansible_distribution}}-{{ansible_distribution_major_version}}.yml"
 
 - name: Create dlvm group
   group:
@@ -33,58 +13,9 @@
   user:
     name: "{{dlvm_user}}"
     group: "{{dlvm_group}}"
-    groups: wheel
     state: present
 
-- name: Copy dlvm user sudo no password file
+- name: Configure sudo
   template:
-    src: 99-dlvm-user.j2
-    dest: /etc/sudoers.d/99-dlvm-user
-
-- name: Install virtualenv
-  pip:
-    name: virtualenv
-
-- name: Create virtualenv
-  pip:
-    requirements: ""
-    virtualenv: "{{dlvm_env_path}}"
-    virtualenv_python: python2.7
-
-- name: Install dlvm
-  pip:
-    name: "{{dlvm_package}}"
-    virtualenv: "{{dlvm_env_path}}"
-    state: latest
-
-- name: Create dlvm conf directory
-  file:
-    path: "{{dlvm_conf_path}}"
-    state: directory
-    recurse: yes
-
-- name: Create dlvm main conf file
-  template:
-    src: conf.yml.j2
-    dest: "{{dlvm_conf_path}}/conf.yml"
-
-- name: Create dlvm log conf file
-  template:
-    src: logger.yml.j2
-    dest: "{{dlvm_conf_path}}/logger.yml"
-
-- name: Create dlvm log directory
-  file:
-    path: "{{dlvm_log_path}}"
-    state: directory
-    owner: "{{dlvm_user}}"
-    group: "{{dlvm_group}}"
-    recurse: yes
-
-- name: Create dlvm work directory
-  file:
-    path: "{{dlvm_conf.work_dir}}"
-    state: directory
-    owner: "{{dlvm_user}}"
-    group: "{{dlvm_group}}"
-    recurse: yes
+    src: 80-dlvm-user.j2
+    dest: /etc/sudoers.d/80-dlvm-user

@@ -1,0 +1,11 @@
+---
+# This playbook would install python3 on ubuntu 16
+
+- name: Add python3 repo
+  apt_repository:
+    repo: 'ppa:jonathonf/python-3.6'
+
+- name: Install python3
+  apt:
+    name: python3.{{python_minor_version}}
+    state: present
