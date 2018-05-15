@@ -1,0 +1,17 @@
+---
+# This playbook would deploy mariadb
+
+- name: Install maraidb
+  include: "{{ansible_distribution}}-{{ansible_distribution_major_version}}.yml"
+
+- name: Create dlvm user
+  mysql_user:
+    name: "{{db_user}}"
+    password: "{{db_password}}"
+    priv: "{{db_name}}.*:ALL"
+    state: present
+
+- name: Create dlvm db
+  mysql_db:
+    name: "{{db_name}}"
+    state: present

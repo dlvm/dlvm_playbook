@@ -72,3 +72,13 @@
     virtualenv: "{{dlvm_env_path}}"
     virtualenv_python: "python3.{{python_minor_version}}"
     state: present
+
+- name: Copy dlvm configuration files
+  template:
+    src: "{{item}}.j2"
+    dest: "{{dlvm_conf_path}}/{{item}}"
+  with_items:
+    - dlvm.cfg
+    - logger.json
+    - celery.json
+    - sqlalchemy.json

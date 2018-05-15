@@ -1,0 +1,9 @@
+---
+# This playbook would install all dlvm control plan components and
+# mariadb, rabbitmq on a single server
+
+- hosts: all
+  roles:
+    - role: mariadb
+    - role: rabbitmq
+    - role: dlvm_common

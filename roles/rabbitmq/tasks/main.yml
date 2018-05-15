@@ -1,0 +1,28 @@
+---
+# This playbook would deploy rabbitmq
+
+- name: Install rabbitmq-server
+  package:
+    name: rabbitmq-server
+    state: present
+
+- name: Start rabbitmq-server
+  systemd:
+    name: rabbitmq-server
+    state: started
+    enabled: yes
+
+- name: Create rabbitmq vhost
+  rabbitmq_vhost:
+    name: "{{mq_vhost}}"
+    state: present
+
+- name: Create rabbitmq user
+  rabbitmq_user:
+    user: "{{mq_user}}"
+    password: "{{mq_password}}"
+    vhost: "{{mq_vhost}}"
+    configure_priv: .*
+    read_priv: .*
+    write_priv: .*
+    state: present

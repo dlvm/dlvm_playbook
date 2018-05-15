@@ -1,0 +1,55 @@
+"version": 1
+"formatters": {
+    "simple": {
+        "format": "%(asctime)s - %(levelname)s - %(req_id)s %(message)s"
+    }
+}
+"handlers": {
+    "api_handler": {
+        "class": "dlvm.common.utils.PidWatchedFileHandler",
+        "formatter": "simple",
+        "filename": "{{dlvm_log_path}}/api_{pid}.log"
+    },
+    "dpv_handler": {
+        "class": "dlvm.common.utils.PidWatchedFileHandler",
+        "formatter": "simple",
+        "filename": "{{dlvm_log_path}}/dpv_{pid}.log"
+    },
+    "ihost_handler": {
+        "class": "dlvm.common.utils.PidWatchedFileHandler",
+        "formatter": "simple",
+        "filename": "{{dlvm_log_path}}/ihost_{pid}.log"
+    },
+    "worker_handler": {
+        "class": "dlvm.common.utils.PidWatchedFileHandler",
+        "formatter": "simple",
+        "filename": "{{dlvm_log_path}}/worker_{pid}.log"
+    },
+    "monitor_handler": {
+        "class": "dlvm.common.utils.PidWatchedFileHandler",
+        "formatter": "simple",
+        "filename": "{{dlvm_log_path}}/monitor_{pid}.log"
+    }
+}
+"loggers": {
+    "dlvm_api": {
+        "level": "INFO",
+        "handlers": ["api_handler"]
+    },
+    "dlvm_dpv": {
+        "level": "INFO",
+        "handlers": ["dpv_handler"]
+    },
+    "dlvm_ihost": {
+        "level": "INFO",
+        "handlers": ["ihost_handler"]
+    },
+    "dlvm_worker": {
+        "level": "INFO",
+        "handlers": ["worker_handler"]
+    },
+    "dlvm_monitor": {
+        "level": "INFO",
+        "handlers": ["monitor_handler"]
+    }
+}
