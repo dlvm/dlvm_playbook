@@ -70,8 +70,8 @@
   pip:
     name: "{{dlvm_package}}"
     virtualenv: "{{dlvm_env_path}}"
-    virtualenv_python: "python3.{{python_minor_version}}"
     state: present
+  register: dlvm_package_update
 
 - name: Copy dlvm configuration files
   template:
@@ -82,3 +82,14 @@
     - logger.json
     - celery.json
     - sqlalchemy.json
+  register: dlvm_conf_update
+
+- name: Init db
+  command: "/bin/bash -c 'source {{dlvm_env_path}}/bin/activate; dlvm_init_db'"
+  become: yes
+  become_user: "{{dlvm_user}}"
+
+- name: Create unify variable for dlvm change
+  command: /bin/true
+  register: dlvm_update
+  when: dlvm_package_update.changed or dlvm_conf_update.changed

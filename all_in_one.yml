@@ -6,4 +6,4 @@
   roles:
     - role: mariadb
     - role: rabbitmq
-    - role: dlvm_common
+    - role: api_server
