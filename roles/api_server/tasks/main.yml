@@ -10,7 +10,7 @@
 
 - name: Create gunicorn service file
   template:
-    src: gunicorn.service.j2
+    src: "{{gunicorn_service_template}}"
     dest: /etc/systemd/system/gunicorn.service
   notify: "Restart gunicorn"
 

@@ -3,10 +3,18 @@ Description=gunicorn daemon
 After=network.target
 
 [Service]
-PIDFile={{dlvm_var_path}}/gunicorn.pid
 User={{dlvm_user}}
 Group={{dlvm_group}}
-ExecStart=/bin/bash -c "source {{dlvm_env_path}}/bin/activate; gunicorn --timeout 120 --pid {{dlvm_var_path}}/gunicorn.pid --access-logfile {{gunicorn_access_file}} --workers {{gunicorn_workers}} --bind {{gunicorn_bind}} dlvm.api_server:app"
+ExecStart=/bin/bash -c "source {{dlvm_env_path}}/bin/activate; gunicorn \
+          --pid {{gunicorn_pid}} --bind {{gunicorn_bind}} \
+          --access-logfile {{gunicorn_access_logfile}} \
+          --error-logfile {{gunicorn_error_logfile}} \
+          {{gunicorn_capture_output}} \
+          --workers {{gunicorn_workers}} --threads {{gunicorn_threads}} \
+          --max-requests {{gunicorn_max_requests}} \
+          --max-requests-jitter {{gunicorn_max_requests_jitter}} \
+          --timeout {{gunicorn_timeout}} {{gunicorn_opts}} \
+          dlvm.api_server:app"
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
 PrivateTmp=true

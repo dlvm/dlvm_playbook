@@ -1,0 +1,12 @@
+gunicorn_service_template: gunicorn.service.j2
+gunicorn_pid: "{{dlvm_var_path}}/gunicorn.pid"
+gunicorn_bind: "127.0.0.1:9521"
+gunicorn_access_logfile: "{{dlvm_log_path}}/gunicorn_access.log"
+gunicorn_error_logfile: "{{dlvm_log_path}}/gunicorn_error.log"
+gunicorn_capture_output: "--capture-output"
+gunicorn_workers: 8
+gunicorn_threads: 8
+gunicorn_max_requests: 1000
+gunicorn_max_requests_jitter: 50
+gunicorn_timeout: 60
+gunicorn_opts: ""
