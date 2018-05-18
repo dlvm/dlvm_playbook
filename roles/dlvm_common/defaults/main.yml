@@ -1,0 +1,7 @@
+dlvm_sudo_template: default_sudo_conf.j2
+dlvm_sudo_dest: /etc/sudoers.d/80-dlvm-user
+dlvm_requirements_template: default_requirements.txt.j2
+dlvm_cfg_template: default_dlvm.cfg.j2
+dlvm_logger_template: default_logger.json.j2
+dlvm_celery_template: default_celery.json.j2
+dlvm_sqlalchemy_template: default_sqlalchemy.json.j2

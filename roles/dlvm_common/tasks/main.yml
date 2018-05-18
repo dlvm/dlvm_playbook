@@ -17,8 +17,8 @@
 
 - name: Configure sudo
   template:
-    src: 80-dlvm-user.j2
-    dest: /etc/sudoers.d/80-dlvm-user
+    src: "{{dlvm_sudo_template}}"
+    dest: "{{dlvm_sudo_dest}}"
 
 - name: Create dlvm root dir
   file:
@@ -55,8 +55,8 @@
     state: present
 
 - name: Copy requirements.txt
-  copy:
-    src: requirements.txt
+  template:
+    src: "{{dlvm_requirements_template}}"
     dest: "{{dlvm_root_dir}}/requirements.txt"
 
 - name: Create virtualenv and install dependencies
@@ -64,7 +64,7 @@
     requirements: "{{dlvm_root_dir}}/requirements.txt"
     virtualenv: "{{dlvm_env_path}}"
     virtualenv_python: "python3.{{python_minor_version}}"
-    state: present
+    state: latest
 
 - name: install dlvm
   pip:
@@ -73,16 +73,29 @@
     state: present
   register: dlvm_package_update
 
-- name: Copy dlvm configuration files
+- name: Copy dlvm main configuration file
   template:
-    src: "{{item}}.j2"
-    dest: "{{dlvm_conf_path}}/{{item}}"
-  with_items:
-    - dlvm.cfg
-    - logger.json
-    - celery.json
-    - sqlalchemy.json
-  register: dlvm_conf_update
+    src: "{{dlvm_cfg_template}}"
+    dest: "{{dlvm_conf_path}}/dlvm.cfg"
+  register: dlvm_cfg_update
+
+- name: Copy dlvm logger configuration file
+  template:
+    src: "{{dlvm_logger_template}}"
+    dest: "{{dlvm_conf_path}}/logger.json"
+  register: dlvm_logger_update
+
+- name: Copy celery configuration file
+  template:
+    src: "{{dlvm_celery_template}}"
+    dest: "{{dlvm_conf_path}}/celery.json"
+  register: dlvm_celery_update
+
+- name: Copy sqlalchemy configuration file
+  template:
+    src: "{{dlvm_sqlalchemy_template}}"
+    dest: "{{dlvm_conf_path}}sqlalchemy.json"
+  register: dlvm_sqlalchemy_update
 
 - name: Init db
   command: "/bin/bash -c 'source {{dlvm_env_path}}/bin/activate; dlvm_init_db'"
@@ -92,4 +105,8 @@
 - name: Create unify variable for dlvm change
   command: /bin/true
   register: dlvm_update
-  when: dlvm_package_update.changed or dlvm_conf_update.changed
+  when: dlvm_package_update.changed or
+        dlvm_cfg_update.changed or
+        dlvm_logger_update.changed or
+        dlvm_celery_update.changed or
+        dlvm_sqlalchemy_update.changed
