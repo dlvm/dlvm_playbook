@@ -1,0 +1,13 @@
+[Unit]
+Description=dpv_agent daemon
+After=network.target
+
+[Service]
+User={{dlvm_user}}
+Group={{dlvm_group}}
+RuntimeDirectory=dlvm_dpv_agent
+ExecStart=/bin/bash -c "source {{dlvm_env_path}}/bin/activate; dlvm_dpv_agent"
+ExecStop=/bin/kill -s TERM $MAINPID
+
+[Install]
+WantedBy=multi-user.target

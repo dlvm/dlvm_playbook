@@ -1,10 +1,9 @@
 ---
 # This playbook would install dlvm_dpv_agent
 
-- hosts: dpvs
+- hosts: all
   roles:
-    - role: common
-    - role: iscsi
     - role: dpv_agent
+    - role: iscsi
     - role: local_lvm
       when: dlvm_local_lvm

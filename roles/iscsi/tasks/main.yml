@@ -1,0 +1,19 @@
+---
+# This playbook would deploy open-iscsi and targetcli
+
+- name: Install open-iscsi and targetcli
+  package:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - open-iscsi
+    - targetcli
+
+- name: Copy iscsi configure files
+  template:
+    src: "{{item}}.j2"
+    dest: /etc/iscsi/{{item}}
+  with_items:
+    - initiatorname.iscsi
+    - iscsid.conf
+  notify: "Restart iscsid"

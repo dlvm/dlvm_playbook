@@ -12,7 +12,7 @@ db_password: dlvm_password
 db_dns: localhost
 db_name: dlvm
 db_uri: "mysql+pymysql://{{db_user}}:{{db_password}}@{{db_dns}}/{{db_name}}"
-local_vg: dlvm_vg
+dlvm_local_vg: dlvm_vg
 mq_user: dlvm_user
 mq_password: dlvm_password
 mq_dns: localhost
@@ -22,4 +22,3 @@ mq_broker: "amqp://{{mq_user}}:{{mq_password}}@{{mq_dns}}:{{mq_port}}/{{mq_vhost
 iscsi_userid: dlvm_user
 iscsi_password: dlvm_password
 dlvm_local_lvm: false
-dlvm_all_in_one: false

@@ -1,0 +1,8 @@
+---
+
+- name: Restart dpv_agent
+  systemd:
+    name: dlvm_dpv_agent
+    state: restarted
+    daemon_reload: yes
+    enabled: yes

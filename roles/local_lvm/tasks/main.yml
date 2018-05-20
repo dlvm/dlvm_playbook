@@ -1,0 +1,34 @@
+---
+# This playbook would deploy local lvm for dlvm dpv
+
+- name: Create loop device file
+  command: "dd if=/dev/zero of={{device_file}} bs=1M count=1 seek={{device_size}}"
+  args:
+    creates: "{{device_file}}"
+
+- name: Check loop device
+  command: "losetup {{loop_name}}"
+  register: check_loop_device
+  ignore_errors: True
+
+- name: Create loop device
+  command: "losetup {{loop_name}} {{device_file}}"
+  when: check_loop_device|failed
+
+- name: Check physical volume
+  command: "pvs {{loop_name}}"
+  register: check_physical_volume
+  ignore_errors: True
+
+- name: Create physical volume
+  command: "pvcreate {{loop_name}}"
+  when: check_physical_volume|failed
+
+- name: Check volume group
+  command: "vgs {{dlvm_local_vg}}"
+  register: check_volume_group
+  ignore_errors: True
+
+- name: Create volume group
+  command: "vgcreate {{dlvm_local_vg}} {{loop_name}}"
+  when: check_volume_group|failed
