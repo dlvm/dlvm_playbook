@@ -11,7 +11,7 @@
 - name: Create gunicorn service file
   template:
     src: "{{gunicorn_service_template}}"
-    dest: /etc/systemd/system/gunicorn.service
+    dest: "{{gunicorn_service_dest_path}}"
   notify: "Restart gunicorn"
 
 - name: Check dlvm_update

@@ -9,6 +9,7 @@ ExecStart=/bin/bash -c "source {{dlvm_env_path}}/bin/activate; gunicorn \
           --pid {{gunicorn_pid}} --bind {{gunicorn_bind}} \
           --access-logfile {{gunicorn_access_logfile}} \
           --error-logfile {{gunicorn_error_logfile}} \
+          --log-level {{gunicorn_log_level}} \
           {{gunicorn_capture_output}} \
           --workers {{gunicorn_workers}} --threads {{gunicorn_threads}} \
           --max-requests {{gunicorn_max_requests}} \

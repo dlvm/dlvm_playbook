@@ -1,0 +1,13 @@
+---
+# This playbook would deploy dlvm worker
+
+- name: Create celery service file
+  template:
+    src: "{{celery_service_template}}"
+    dest: "{{celery_service_dest_path}}"
+  notify: "Restart celery"
+
+- name: Check dlvm_update
+  command: /bin/true
+  notify: "Restart celery"
+  when: dlvm_update.changed

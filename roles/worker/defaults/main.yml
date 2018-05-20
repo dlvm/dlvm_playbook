@@ -1,0 +1,9 @@
+celery_service_template: celery.service.j2
+celery_service_dest_path: /etc/systemd/system/celery.service
+celery_nodes: "node1 node2 node3"
+celery_pidfile: "{{dlvm_var_path}}/celery-%%n.pid"
+celery_logfile: "{{dlvm_log_path}}/celery-%%n.log"
+celery_loglevel: "INFO"
+celery_concurrency: 4
+celery_max_tasks_per_child: 1000
+celery_opts: ""

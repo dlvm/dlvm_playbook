@@ -7,3 +7,4 @@
     - role: mariadb
     - role: rabbitmq
     - role: api_server
+    - role: worker
