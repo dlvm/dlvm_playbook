@@ -40,14 +40,6 @@
     group: "{{dlvm_group}}"
     recurse: yes
 
-- name: Create dlvm var path
-  file:
-    path: "{{dlvm_var_path}}"
-    state: directory
-    owner: "{{dlvm_user}}"
-    group: "{{dlvm_group}}"
-    recurse: yes
-
 - name: Install virtualenv
   pip:
     name: virtualenv

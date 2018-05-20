@@ -6,20 +6,21 @@ After=network.target
 Type=forking
 User={{dlvm_user}}
 Group={{dlvm_group}}
+RuntimeDirectory=dlvm_celery
 ExecStart=/bin/bash -c "source {{dlvm_env_path}}/bin/activate; \
-          celery multi start {{celery_nodes}} \
-          -A dlvm.worker:app --pidfile={{celery_pidfile}} \
+          celery multi start 8 \
+          -A dlvm.worker:app --pidfile=/run/dlvm_celery/%%n.pid \
           --logfile={{celery_logfile}} \
           --loglevel={{celery_loglevel}} \
           --concurrency={{celery_concurrency}} \
           --max-tasks-per-child={{celery_max_tasks_per_child}} \
           {{celery_opts}}"
 ExecStop=/bin/bash -c "source {{dlvm_env_path}}/bin/activate; \
-         celery multi stopwait {{celery_nodes}} \
-         --pidfile={{celery_pidfile}}"
+         celery multi stopwait 8 \
+         --pidfile=/var/run/dlvm/celery-%%n.pid"
 ExecReload=/bin/bash -c "source {{dlvm_env_path}}/bin/activate; \
-           celery multi restart {{celery_nodes}} \
-           -A dlvm.worker:app --pidfile={{celery_pidfile}} \
+           celery multi restart 8 \
+           -A dlvm.worker:app --pidfile=/var/run/dlvm/celery-%%n.pid \
            --logfile={{celery_logfile}} \
            --loglevel={{celery_loglevel}} \
            --concurrency={{celery_concurrency}} \

@@ -6,7 +6,6 @@ dlvm_root_dir: "/opt/dlvm"
 dlvm_env_path: "{{dlvm_root_dir}}/env"
 dlvm_conf_path: "{{dlvm_root_dir}}/conf"
 dlvm_log_path: "{{dlvm_root_dir}}/log"
-dlvm_var_path: "{{dlvm_root_dir}}/var"
 dlvm_initiator_prefix: "iqn.2015-09.dlvm.initiator"
 db_user: dlvm_user
 db_password: dlvm_password

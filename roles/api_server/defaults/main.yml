@@ -1,6 +1,3 @@
-gunicorn_service_template: gunicorn.service.j2
-gunicorn_service_dest_path: /etc/systemd/system/gunicorn.service
-gunicorn_pid: "{{dlvm_var_path}}/gunicorn.pid"
 gunicorn_bind: "127.0.0.1:9521"
 gunicorn_access_logfile: "{{dlvm_log_path}}/gunicorn_access.log"
 gunicorn_error_logfile: "{{dlvm_log_path}}/gunicorn_error.log"

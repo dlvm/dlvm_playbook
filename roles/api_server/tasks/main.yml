@@ -10,11 +10,18 @@
 
 - name: Create gunicorn service file
   template:
-    src: "{{gunicorn_service_template}}"
-    dest: "{{gunicorn_service_dest_path}}"
+    src: gunicorn.service.j2
+    dest: /etc/systemd/system/dlvm_gunicorn.service
   notify: "Restart gunicorn"
 
 - name: Check dlvm_update
   command: /bin/true
   notify: "Restart gunicorn"
   when: dlvm_update.changed
+
+- name: Start gunicorn service
+  systemd:
+    name: dlvm_gunicorn
+    state: started
+    daemon_reload: yes
+    enabled: yes

@@ -2,7 +2,7 @@
 
 - name: Restart celery
   systemd:
-    name: celery
+    name: dlvm_celery
     state: restarted
     daemon_reload: yes
     enabled: yes

@@ -3,11 +3,18 @@
 
 - name: Create celery service file
   template:
-    src: "{{celery_service_template}}"
-    dest: "{{celery_service_dest_path}}"
+    src: celery.service.j2
+    dest: /etc/systemd/system/dlvm_celery.service
   notify: "Restart celery"
 
 - name: Check dlvm_update
   command: /bin/true
   notify: "Restart celery"
   when: dlvm_update.changed
+
+- name: Start celery service
+  systemd:
+    name: dlvm_celery
+    state: started
+    daemon_reload: yes
+    enabled: yes
