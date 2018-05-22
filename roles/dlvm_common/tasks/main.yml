@@ -62,7 +62,7 @@
   pip:
     name: "{{dlvm_package}}"
     virtualenv: "{{dlvm_env_path}}"
-    state: present
+    state: latest
   register: dlvm_package_update
 
 - name: Copy dlvm main configuration file
@@ -86,7 +86,7 @@
 - name: Copy sqlalchemy configuration file
   template:
     src: "{{dlvm_sqlalchemy_template}}"
-    dest: "{{dlvm_conf_path}}sqlalchemy.json"
+    dest: "{{dlvm_conf_path}}/sqlalchemy.json"
   register: dlvm_sqlalchemy_update
 
 - name: Init db

@@ -5,6 +5,7 @@ After=network.target
 [Service]
 User={{dlvm_user}}
 Group={{dlvm_group}}
+Environment="DLVM_CONF={{dlvm_conf_path}}"
 RuntimeDirectory=dlvm_gunicorn
 ExecStart=/bin/bash -c "source {{dlvm_env_path}}/bin/activate; gunicorn \
           --pid /run/dlvm_gunicorn/gunicorn.pid --bind {{gunicorn_bind}} \

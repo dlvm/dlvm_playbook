@@ -6,6 +6,7 @@ After=network.target
 Type=forking
 User={{dlvm_user}}
 Group={{dlvm_group}}
+Environment="DLVM_CONF={{dlvm_conf_path}}"
 RuntimeDirectory=dlvm_celery
 ExecStart=/bin/bash -c "source {{dlvm_env_path}}/bin/activate; \
           celery multi start 8 \
