@@ -2,4 +2,5 @@ celery_logfile: "{{dlvm_log_path}}/celery-%%n.log"
 celery_loglevel: "INFO"
 celery_concurrency: 4
 celery_max_tasks_per_child: 1000
+celery_queue: "-Q:1-8 low_prio,high_prio"
 celery_opts: ""
