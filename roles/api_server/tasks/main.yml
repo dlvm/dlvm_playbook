@@ -18,10 +18,3 @@
   command: /bin/true
   notify: "Restart gunicorn"
   when: dlvm_update.changed
-
-- name: Start gunicorn service
-  systemd:
-    name: dlvm_gunicorn
-    state: started
-    daemon_reload: yes
-    enabled: yes

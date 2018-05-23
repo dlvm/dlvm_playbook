@@ -11,10 +11,3 @@
   command: /bin/true
   notify: "Restart celery"
   when: dlvm_update.changed
-
-- name: Start celery service
-  systemd:
-    name: dlvm_celery
-    state: started
-    daemon_reload: yes
-    enabled: yes

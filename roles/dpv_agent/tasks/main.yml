@@ -11,10 +11,3 @@
   command: /bin/true
   notify: "Restart dpv_agent"
   when: dlvm_update.changed
-
-- name: Start dpv_agent service
-  systemd:
-    name: dlvm_dpv_agent
-    state: started
-    daemon_reload: yes
-    enabled: yes
