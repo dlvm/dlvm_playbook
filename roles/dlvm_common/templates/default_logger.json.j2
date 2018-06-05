@@ -21,10 +21,10 @@
             "formatter": "simple",
             "filename": "{{dlvm_log_path}}/ihost.log"
         },
-        "worker_handler": {
+        "sm_handler": {
             "class": "dlvm.common.utils.PidWatchedFileHandler",
             "formatter": "simple",
-            "filename": "{{dlvm_log_path}}/worker_{pid}.log"
+            "filename": "{{dlvm_log_path}}/sm_{pid}.log"
         },
         "monitor_handler": {
             "class": "dlvm.common.utils.PidWatchedFileHandler",
@@ -33,24 +33,24 @@
         }
     },
     "loggers": {
-        "dlvm_api": {
+        "dlvm.api": {
             "level": "INFO",
             "handlers": ["api_handler"]
         },
-        "dlvm_dpv": {
+        "dlvm.dpv": {
             "level": "INFO",
             "handlers": ["dpv_handler"]
         },
-        "dlvm_ihost": {
+        "dlvm.ihost": {
             "level": "INFO",
             "handlers": ["ihost_handler"]
         },
-        "dlvm_worker": {
+        "dlvm.sm": {
             "level": "INFO",
             "propagate": false,
-            "handlers": ["worker_handler"]
+            "handlers": ["sm_handler"]
         },
-        "dlvm_monitor": {
+        "dlvm.monitor": {
             "level": "INFO",
             "handlers": ["monitor_handler"]
         }

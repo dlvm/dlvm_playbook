@@ -10,11 +10,11 @@ Environment="DLVM_CONF={{dlvm_conf_path}}"
 RuntimeDirectory=dlvm_celery
 ExecStart=/bin/bash -c "source {{dlvm_env_path}}/bin/activate; \
           celery multi start 8 \
-          -A dlvm.worker:app --pidfile=/run/dlvm_celery/%%n.pid \
+          --app=dlvm.worker:app --pidfile=/run/dlvm_celery/%%n.pid \
           --logfile={{celery_logfile}} \
           --loglevel={{celery_loglevel}} \
           --concurrency={{celery_concurrency}} \
-          {{celery_queue}} \
+          --queues={{celery_queue}} \
           --max-tasks-per-child={{celery_max_tasks_per_child}} \
           {{celery_opts}}"
 ExecStop=/bin/bash -c "source {{dlvm_env_path}}/bin/activate; \
@@ -22,11 +22,11 @@ ExecStop=/bin/bash -c "source {{dlvm_env_path}}/bin/activate; \
          --pidfile=/var/run/dlvm/celery-%%n.pid"
 ExecReload=/bin/bash -c "source {{dlvm_env_path}}/bin/activate; \
            celery multi restart 8 \
-           -A dlvm.worker:app --pidfile=/var/run/dlvm/celery-%%n.pid \
+           --app=dlvm.worker:app --pidfile=/var/run/dlvm/celery-%%n.pid \
            --logfile={{celery_logfile}} \
            --loglevel={{celery_loglevel}} \
            --concurrency={{celery_concurrency}} \
-           {{celery_queue}} \
+           --queues={{celery_queue}} \
            --max-tasks-per-child={{celery_max_tasks_per_child}} \
            {{celery_opts}}"
 
