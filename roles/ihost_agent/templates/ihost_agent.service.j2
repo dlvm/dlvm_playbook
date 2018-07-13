@@ -1,0 +1,14 @@
+[Unit]
+Description=ihost_agent daemon
+After=network.target
+
+[Service]
+User={{dlvm_user}}
+Group={{dlvm_group}}
+Environment="DLVM_CONF={{dlvm_conf_path}}"
+RuntimeDirectory=dlvm_ihost_agent
+ExecStart=/bin/bash -c "source {{dlvm_env_path}}/bin/activate; dlvm_ihost_agent"
+ExecStop=/bin/kill -s TERM $MAINPID
+
+[Install]
+WantedBy=multi-user.target

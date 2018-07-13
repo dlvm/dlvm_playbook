@@ -14,12 +14,14 @@
         "dpv_handler": {
             "class": "logging.handlers.WatchedFileHandler",
             "formatter": "simple",
-            "filename": "{{dlvm_log_path}}/dpv.log"
+            "filename": "{{dlvm_log_path}}/dpv.log",
+            "delay": true
         },
         "ihost_handler": {
             "class": "logging.handlers.WatchedFileHandler",
             "formatter": "simple",
-            "filename": "{{dlvm_log_path}}/ihost.log"
+            "filename": "{{dlvm_log_path}}/ihost.log",
+            "delay": true
         },
         "sm_handler": {
             "class": "dlvm.common.utils.PidWatchedFileHandler",
