@@ -4,11 +4,25 @@
 - name: Install maraidb
   include: "{{ansible_distribution}}-{{ansible_distribution_major_version}}.yml"
 
+- name: Copy mariadb configuration file
+  template:
+    src: 90-dlvm.cnf.j2
+    dest: /etc/mysql/mariadb.conf.d/90-dlvm.cnf
+  register: mariadb_conf
+
+- name: Restart mariadb
+  systemd:
+    name: mysql
+    state: restarted
+    enabled: yes
+  when: mariadb_conf.changed
+
 - name: Create dlvm user
   mysql_user:
     name: "{{db_user}}"
     password: "{{db_password}}"
     priv: "{{db_name}}.*:ALL"
+    host: "{{db_host_pattern}}"
     state: present
 
 - name: Create dlvm db

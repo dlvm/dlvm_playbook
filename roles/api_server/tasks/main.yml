@@ -1,6 +1,11 @@
 ---
 # This playbook would deploy dlvm api server
 
+- name: Init db
+  command: "/bin/bash -c 'source {{dlvm_env_path}}/bin/activate; export DLVM_CONF={{dlvm_conf_path}}; dlvm_init_db'"
+  become: yes
+  become_user: "{{dlvm_user}}"
+
 - name: Install gunicorn
   pip:
     name: gunicorn

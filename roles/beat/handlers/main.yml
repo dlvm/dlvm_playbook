@@ -1,0 +1,8 @@
+---
+
+- name: Restart beat
+  systemd:
+    name: dlvm_beat
+    state: restarted
+    daemon_reload: yes
+    enabled: yes

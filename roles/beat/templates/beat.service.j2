@@ -1,0 +1,15 @@
+[Unit]
+Description=beat daemon
+After=network.target
+
+[Service]
+User={{dlvm_user}}
+Group={{dlvm_group}}
+Environment="DLVM_CONF={{dlvm_conf_path}}"
+RuntimeDirectory=dlvm_beat
+ExecStart=/bin/bash -c "source {{dlvm_env_path}}/bin/activate; \
+          celery beat -A dlvm.worker:app \
+          --workdir {{beat_workdir}} \
+          --logfile beat.log \
+          -l {{beat_debug_level}}"
+ExecStop=/bin/kill -s TERM $MAINPID

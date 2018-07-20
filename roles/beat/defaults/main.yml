@@ -1,0 +1,2 @@
+beat_workdir: "{{dlvm_root_dir}}/beat"
+beat_debug_level: debug
