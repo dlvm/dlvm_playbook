@@ -1,0 +1,6 @@
+---
+# This playbook would deploy dlvm worker
+
+- hosts: all
+  roles:
+    - role: worker

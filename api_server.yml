@@ -1,6 +1,6 @@
 ---
-# This playbook would install dlvm_api_server
+# This playbook would install dlvm api_server
 
-- hosts: api_servers
+- hosts: all
   roles:
-    - role: dlvm_common
+    - role: api_server
