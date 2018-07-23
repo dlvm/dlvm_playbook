@@ -1,0 +1,2 @@
+monitor_workdir: "{{dlvm_root_dir}}/monitor"
+monitor_debug_level: debug

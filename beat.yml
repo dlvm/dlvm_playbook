@@ -1,6 +1,0 @@
----
-# This playbook would deploy dlvm beat
-
-- hosts: all
-  roles:
-    - role: beat

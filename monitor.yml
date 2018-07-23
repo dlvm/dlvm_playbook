@@ -1,0 +1,6 @@
+---
+# This playbook would deploy dlvm monitor
+
+- hosts: all
+  roles:
+    - role: monitor
